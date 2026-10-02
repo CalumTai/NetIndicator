@@ -66,3 +66,7 @@ Personal Hotspot is approximated: Apple's Instant Hotspot needs entitlements onl
 ```
 
 Logs scan counts, Wi-Fi power changes, join results and Location status (counts and errors only, no network names).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
