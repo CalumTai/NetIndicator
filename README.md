@@ -16,15 +16,25 @@ A macOS menu bar app that replaces the system Wi-Fi menu and also shows whether 
 - **Personal Hotspot** lists only hotspots you can join right now: saved (password on file) or open, heard in the last 30 seconds with a usable signal. Other people's iPhones go under Other Networks.
 - **Right-click** (or Control-click): Launch at Login, Network Settings…, Quit.
 
-## Build & install
+## Install
+
+Requires macOS 13 or later; runs natively on Intel and Apple Silicon.
+
+1. Download `NetIndicator-<version>.zip` from [Releases](https://github.com/CalumTai/NetIndicator/releases/latest), unzip it, and move `NetIndicator.app` to Applications.
+2. Open it. The app isn't notarized by Apple, so macOS blocks the first launch: go to **System Settings → Privacy & Security**, scroll down and click **Open Anyway**. (Or run `xattr -dr com.apple.quarantine /Applications/NetIndicator.app` in Terminal.)
+3. Click **Allow** when it asks for Location access, so it can show network names.
+4. Optional: hide the system Wi-Fi icon in **System Settings → Control Center → Wi-Fi**, and turn on **Launch at Login** from NetIndicator's right-click menu.
+
+## Build from source
 
 ```bash
 ./build.sh
 ```
 
-Compiles `Sources/*.swift` with `swiftc`, assembles `~/Applications/NetIndicator.app`, ad-hoc signs it, and launches it. Re-run after any change. Requires macOS 13+ and the Xcode Command Line Tools.
+Compiles `Sources/*.swift` with `swiftc` for both Intel and Apple Silicon, assembles `NetIndicator.app`, ad-hoc signs it, installs it to `~/Applications` and launches it. Re-run after any change. Needs the Xcode Command Line Tools. A locally built app skips the Open Anyway step.
 
-`./build.sh --demo --open` launches with sample data and the panel open — handy for checking the layout without touching real networks.
+- `./build.sh --demo --open` launches with sample data and the panel open — handy for checking the layout without touching real networks.
+- `./build.sh --package` writes the release zip to `.build/` without installing anything. The version number is set at the top of `build.sh`.
 
 ## Location permission
 
